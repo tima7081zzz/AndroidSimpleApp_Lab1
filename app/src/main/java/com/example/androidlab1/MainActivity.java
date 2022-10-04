@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private CharSequence NoneValue = "None";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
         Button okButton = findViewById(R.id.response_button);
         okButton.setOnClickListener(view -> {
             CharSequence orderedFlowers = ((EditText) findViewById(R.id.flower)).getText();
+            if (orderedFlowers.length() == 0)
+            {
+                orderedFlowers = NoneValue;
+            }
             CharSequence selectedPrice = getSelectButtonTextByRadioGroupId(R.id.priceRadioGroup);
             CharSequence selectedColor = getSelectButtonTextByRadioGroupId(R.id.colorRadioGroup);
 
@@ -41,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         RadioGroup radioGroup = findViewById(radioGroupId);
         RadioButton selectedButton = findViewById(radioGroup.getCheckedRadioButtonId());
 
-        return selectedButton == null ? "None" : selectedButton.getText();
+        return selectedButton == null ? NoneValue : selectedButton.getText();
     }
 
 }
